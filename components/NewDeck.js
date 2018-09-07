@@ -21,11 +21,10 @@ class NewDeck extends Component {
                 <Text>{this.state.title}</Text>
                 <View style={styles.submitDeck}>
                     <TouchableOpacity
-                        style={styles.startQuiz}
                         onPress={() => {
                         }}>
                         <Text style={styles.submitDeckText}>
-                            Submit New Deck
+                            Submit New Question
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -47,9 +46,11 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     submitDeck: {
-        paddingTop: 200,
+        paddingTop: 160,
     },
     submitDeckText: {
+        textAlign: 'center',
+        width: 300,
         fontSize: 20,
         backgroundColor: purple,
         padding: 5,
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     userInput: {
         color: lightPurp,
         padding: 6,
-        width: 200,
+        width: 300,
         height: 50,
         borderColor: 'white',
         borderWidth: 2,

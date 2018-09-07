@@ -64,17 +64,21 @@ const styles = StyleSheet.create({
         paddingTop: 50,
     },
     startQuizText: {
+        textAlign: 'center',
+        width: 300,
         fontSize: 20,
         backgroundColor: white,
         padding: 5,
-        color: lightPurp,
+        color: purple,
     },
     addCard: {
         paddingTop: 20,
     },
     addCardText: {
+        textAlign: 'center',
+        width: 300,
         fontSize: 20,
-        backgroundColor: lightPurp,
+        backgroundColor: purple,
         padding: 5,
         color: white,
     },
