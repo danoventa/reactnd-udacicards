@@ -14,7 +14,7 @@ class Deck extends Component {
         const { navigation } = this.props;
         const { deckId, deck } = navigation.state.params;
 
-        const deckCount = Object.keys(deck).length;
+        const deckCount = Object.keys(deck.questions).length;
 
         return (
             <View style={styles.deck}>

@@ -5,31 +5,47 @@ import {
     TouchableOpacity,
     StyleSheet,
     FlatList,
+    RefreshControl,
 } from 'react-native';
 import {getDecks} from "../utils/helpers";
-import {lightPurp, pink, white, purple, gray, red} from "../utils/colors";
+import {lightPurp, white, purple } from "../utils/colors";
 
 class Decks extends Component {
     state = {
         decks: {},
+        refreshing: false,
+        update: false,
     };
 
-    componentDidMount () {
-        const rawDecks = getDecks();
-
-        const decks = Object.keys(rawDecks).map((deck) => {
-            return {[deck]: rawDecks[deck]}
+    _onRefresh = async () => {
+        this.setState({refreshing: true});
+        await this.getItems().then(() => {
+            this.setState({refreshing: false});
         });
-        this.setState(() => ({decks}));
-    }
+    };
+    componentDidMount = async () =>  await this.getItems();
+
+    getItems = async () => {
+        await getDecks().then((json) => {
+            this.setState(() => {
+                    const rawDecks = JSON.parse(json);
+                    const decks = Object.keys(rawDecks).map((deck) => rawDecks[deck]);
+
+                    return {
+                        decks: Object.keys(decks).map((deck) => {
+                            return {[deck]: decks[deck]}
+                        })
+                    }
+                }
+            );
+    })};
 
     _keyExtractor = (deck, index) => {
         return Object.keys(deck)[0];
     };
 
-    _renderItem = (deck) => {
-        const index = deck.index;
-        const deckObj = deck.item[index];
+    _renderItem = ({index, item}) => {
+        const deckObj = item[index];
 
         return <TouchableOpacity
             style={[styles.deckItems]}
@@ -51,10 +67,28 @@ class Decks extends Component {
         </TouchableOpacity>
     };
 
+    componentWillReceiveProps(nextProps) {
+        const { params } = nextProps.navigation.state;
+
+        if( params && params.update ) {
+
+            this.setState({
+                decks: this.getItems(),
+            })
+        }
+    }
+
     render() {
-        const { decks } = this.state;
-        console.log("Just work! ");
-        console.log(decks && Object.keys(decks).length > 0);
+        const {decks} = this.state;
+
+        const didBlurSubscription = this.props.navigation.addListener(
+            'didBlur',
+            payload => {
+                console.debug('didBlur', payload);
+            }
+        );
+// Remove the listener when you are done
+        didBlurSubscription.remove();
 
         return (
             <View>
@@ -64,6 +98,12 @@ class Decks extends Component {
                         data={decks}
                         keyExtractor={this._keyExtractor}
                         renderItem={this._renderItem}
+                        refreshControl={
+                            <RefreshControl
+                                refreshing={this.state.refreshing}
+                                onRefresh={this._onRefresh}
+                            />
+                        }
                     />
                 }
             </View>

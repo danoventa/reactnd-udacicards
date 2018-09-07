@@ -5,56 +5,41 @@ import NewDeck from "./components/NewDeck";
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 import NewQuestion from "./components/NewQuestion";
 import Quiz from "./components/Quiz";
-import {purple, white, lightPurp, red, pink} from "./utils/colors";
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
+import {purple, white, lightPurp} from "./utils/colors";
+import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import Deck from "./components/Deck";
-
-function UdaciStatusBar ({backgroundColor, ...props}) {
-    return (
-        <View style={{ backgroundColor, height: 1 }}>
-            <StatusBar  backgroundColor={backgroundColor} {...props} />
-        </View>
-    )
-}
 
 const Tabs = createBottomTabNavigator({
     Decks: {
         screen: Decks,
         navigationOptions: {
             tabBarLabel: 'Decks',
-            tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
+            tabBarIcon: ({tintColor}) => <MaterialCommunityIcons name='cards' size={30} color={tintColor}/>
         },
     },
     NewDeck: {
         screen: NewDeck,
         navigationOptions: {
-            tabBarLabel: 'New Deck',
-            tabBarIcon: ({ tintColor }) => <FontAwesome name='plus-square' size={30} color={tintColor} />
+                tabBarLabel: 'New Deck',
+                tabBarIcon: ({tintColor}) => <MaterialIcons name='library-add' size={30} color={tintColor}/>
+            },
         },
-    },
-    }, {
+    },{
     navigationOptions: {
-        headerStyle: {
-            backgroundColor: purple,
-        }
+        header: null,
+        fontColor: purple,
     },
     tabBarOptions: {
         activeTintColor: purple,
+        backgroundColor: lightPurp,
 
         style: {
             height: 56,
-            shadowColor: 'rgba(0, 0, 0, 0.24)',
-            shadowOffset: {
-                width: 0,
-                height: 3
-            },
-            shadowRadius: 6,
-            shadowOpacity: 1
+            backgroundColor: white,
         }
     }
 });
 
-var black;
 const MainNavigator = createStackNavigator({
     Home: {
         screen: Tabs,
@@ -87,10 +72,10 @@ const MainNavigator = createStackNavigator({
 });
 
 export default class App extends React.Component {
-  render() {
+    render() {
     return (
       <View style={{flex: 1}}>
-          <UdaciStatusBar backgroundColor={purple} barStyle="light-content" />
+          <StatusBar backgroundColor={purple} barStyle='default' />
           <MainNavigator />
       </View>
     );
@@ -99,7 +84,7 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: purple,
     alignItems: 'center',
     justifyContent: 'center',
   },

@@ -1,16 +1,37 @@
 import React, {Component} from 'react'
 import {Text, View, StyleSheet, TouchableOpacity, TextInput} from 'react-native'
 import {lightPurp, purple, white} from "../utils/colors";
+import {saveDeckTitle} from "../utils/helpers";
+import { NavigationActions } from 'react-navigation'
+
 
 class NewDeck extends Component {
     state = {
         title: ''
     };
 
-    // check if state exists, if not create it.
+    _updatedDeck = NavigationActions.setParams({
+        update: true,
+        key: 'Decks',
+    });
 
-    // add new object ot state
-    // get questions -> [{index}-name]: name
+    _setNewDeck = async () => {
+        await saveDeckTitle(this.state.title).then(() => {
+                this.setState({
+                    title: '',
+                });
+
+            const setParamsAction = NavigationActions.setParams({
+                params: { title: 'Some Value From Tab1' },
+                key: 'Decks',
+            });
+
+            this.props.navigation.dispatch(this._updatedDeck, setParamsAction);
+            this.props.navigation.navigate('Decks', {update: true});
+            }
+        );
+
+    };
 
     render() {
         return (
@@ -23,11 +44,9 @@ class NewDeck extends Component {
                         value={this.state.title}
                     />
                 </View>
-                <Text>{this.state.title}</Text>
                 <View style={styles.submitDeck}>
                     <TouchableOpacity
-                        onPress={() => {
-                        }}>
+                        onPress={this._setNewDeck}>
                         <Text style={styles.submitDeckText}>
                             Submit New Question
                         </Text>
