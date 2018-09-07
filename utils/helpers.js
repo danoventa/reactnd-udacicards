@@ -11,7 +11,7 @@ export function getDecks() {
     const mockDecks = {
         React: {
             title: 'React',
-                questions: [
+            questions: [
                 {
                     question: 'What is React?',
                     answer: 'A library for managing user interfaces'
@@ -20,15 +20,121 @@ export function getDecks() {
         },
         JavaScript: {
             title: 'JavaScript',
-                questions: [
+            questions: [
                 {
                     question: 'What is a closure?',
                     answer: 'The combination of a function and the lexical environment within which that function was declared.'
                 },
-                    {
-                        question: 'What is a closure?',
-                        answer: 'The combination of a function and the lexical environment within which that function was declared.'
-                    }
+                {
+                    question: 'What is a closure?',
+                    answer: 'The combination of a function and the lexical environment within which that function was declared.'
+                }
+            ]
+        },
+        React: {
+            title: 'React',
+            questions: [
+                {
+                    question: 'What is React?',
+                    answer: 'A library for managing user interfaces'
+                }
+            ]
+        },
+        JavafScript: {
+            title: 'JavaScript',
+            questions: [
+                {
+                    question: 'What is a closure?',
+                    answer: 'The combination of a function and the lexical environment within which that function was declared.'
+                },
+                {
+                    question: 'What is a closure?',
+                    answer: 'The combination of a function and the lexical environment within which that function was declared.'
+                }
+            ]
+        },     Raeact: {
+            title: 'React',
+            questions: [
+                {
+                    question: 'What is React?',
+                    answer: 'A library for managing user interfaces'
+                }
+            ]
+        },
+        JavaScfript: {
+            title: 'JavaScript',
+            questions: [
+                {
+                    question: 'What is a closure?',
+                    answer: 'The combination of a function and the lexical environment within which that function was declared.'
+                },
+                {
+                    question: 'What is a closure?',
+                    answer: 'The combination of a function and the lexical environment within which that function was declared.'
+                }
+            ]
+        },     Resact: {
+            title: 'React',
+            questions: [
+                {
+                    question: 'What is React?',
+                    answer: 'A library for managing user interfaces'
+                }
+            ]
+        },
+        JavaScridpt: {
+            title: 'JavaScript',
+            questions: [
+                {
+                    question: 'What is a closure?',
+                    answer: 'The combination of a function and the lexical environment within which that function was declared.'
+                },
+                {
+                    question: 'What is a closure?',
+                    answer: 'The combination of a function and the lexical environment within which that function was declared.'
+                }
+            ]
+        },Raea3ct: {
+            title: 'React',
+            questions: [
+                {
+                    question: 'What is React?',
+                    answer: 'A library for managing user interfaces'
+                }
+            ]
+        },
+        JavaScfri5pt: {
+            title: 'JavaScript',
+            questions: [
+                {
+                    question: 'What is a closure?',
+                    answer: 'The combination of a function and the lexical environment within which that function was declared.'
+                },
+                {
+                    question: 'What is a closure?',
+                    answer: 'The combination of a function and the lexical environment within which that function was declared.'
+                }
+            ]
+        },     Res1ct: {
+            title: 'React',
+            questions: [
+                {
+                    question: 'What is React?',
+                    answer: 'A library for managing user interfaces'
+                }
+            ]
+        },
+        Java4Scridpt: {
+            title: 'JavaScript',
+            questions: [
+                {
+                    question: 'What is a closure?',
+                    answer: 'The combination of a function and the lexical environment within which that function was declared.'
+                },
+                {
+                    question: 'What is a closure?',
+                    answer: 'The combination of a function and the lexical environment within which that function was declared.'
+                }
             ]
         }
     };

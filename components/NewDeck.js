@@ -7,6 +7,11 @@ class NewDeck extends Component {
         title: ''
     };
 
+    // check if state exists, if not create it.
+
+    // add new object ot state
+    // get questions -> [{index}-name]: name
+
     render() {
         return (
             <View style={styles.container}>
