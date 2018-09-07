@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 import {getDecks} from "../utils/helpers";
-import {lightPurp, pink, white} from "../utils/colors";
+import {lightPurp, pink, white, purple, gray, red} from "../utils/colors";
 
 class Decks extends Component {
     state = {
@@ -31,11 +31,11 @@ class Decks extends Component {
                                     }
                                 )}
                             >
-                                <View>
+                                <View style={{justifyContent: 'center'}}>
                                     <Text style={styles.deckItemText} >
-                                        {JSON.stringify(decks[deck].title)}
+                                        {decks[deck].title}
                                     </Text>
-                                    <Text>
+                                    <Text style={styles.deckSubText}>
                                         {decks[deck].questions.length} CARDS
                                     </Text>
                                 </View>
@@ -54,13 +54,16 @@ const styles = StyleSheet.create({
     deckItems: {
         marginTop: 2,
         alignItems: 'center',
-        backgroundColor: lightPurp,
+        backgroundColor: purple,
         paddingTop: 20,
         paddingBottom: 20
     },
     deckItemText: {
-        alignItems: 'center',
         color: white,
         fontSize: 20,
+    }, 
+    deckSubText: {
+        color: lightPurp,
+        textAlign: 'center',
     }
 });

@@ -4,6 +4,8 @@ import { Text, View, StyleSheet } from 'react-native'
 class Quiz extends Component {
     static navigationOptions = ({navigation}) => {
         const {questions} = navigation.state.params;
+
+
         return {
             title: 'quiz'
         }
@@ -11,8 +13,8 @@ class Quiz extends Component {
 
     render() {
         return (
-            <View>
-                <Text>{JSON.stringify(this.props.navigation.state.params.questions)}</Text>>
+            <View style={styles.container}>
+                <Text >{JSON.stringify(this.props.navigation.state.params.questions)}</Text>>
             </View>
         )
     }
@@ -20,5 +22,9 @@ class Quiz extends Component {
 export default Quiz;
 
 const styles = StyleSheet.create({
-
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
 });

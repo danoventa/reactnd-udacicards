@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import { Text, View, StyleSheet } from 'react-native'
-import {purple} from "../utils/colors";
+import {Text, View, StyleSheet, Button, TouchableOpacity} from 'react-native'
+import {purple, white, orange, pink, lightPurp, } from "../utils/colors";
 
 class Deck extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -17,23 +17,30 @@ class Deck extends Component {
         const deckCount = Object.keys(deck).length;
 
         return (
-            <View style={[styles.deck, {alignContent: 'center'}]}>
+            <View style={styles.deck}>
                 <Text style={styles.deckText}>{deck.title}</Text>
-                <Text>{deckCount} cards</Text>
+                <Text style={{color: lightPurp}}>{deckCount} cards</Text>
 
-                <Text onPress={() => navigation.navigate(
-                    'Quiz',
-                    {
-                        questions: deck.questions,
-                    }
-                )}>START QUIZ</Text>
-
-                <Text onPress={() => navigation.navigate(
+                <TouchableOpacity
+                    style={[styles.startQuiz]}
+                    onPress={() => navigation.navigate(
+                        'Quiz',
+                        {
+                            questions: deck.questions,
+                        })}>
+                    <Text style={styles.startQuizText} >
+                        Start Quiz
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.addCard}
+                    onPress={() => navigation.navigate(
                     'NewQuestion',
-                    {
-                        deckId: deckId,
-                    }
-                )}>Add Card</Text>
+                        {deckId: deckId,})}>
+                    <Text style={styles.addCardText} >
+                        Add Card
+                    </Text>
+                </TouchableOpacity>
             </View>
         )
     }
@@ -43,6 +50,7 @@ export default Deck;
 
 const styles = StyleSheet.create({
     deck : {
+        flex: 1,
         justifyContent: 'center',
         paddingTop: 20,
         paddingBottom: 20,
@@ -51,5 +59,23 @@ const styles = StyleSheet.create({
     deckText: {
         color: purple,
         fontSize: 30,
-    }
+    },
+    startQuiz: {
+        paddingTop: 50,
+    },
+    startQuizText: {
+        fontSize: 20,
+        backgroundColor: white,
+        padding: 5,
+        color: lightPurp,
+    },
+    addCard: {
+        paddingTop: 20,
+    },
+    addCardText: {
+        fontSize: 20,
+        backgroundColor: lightPurp,
+        padding: 5,
+        color: white,
+    },
 });

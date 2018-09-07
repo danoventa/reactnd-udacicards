@@ -17,7 +17,7 @@ class NewQuestion extends Component{
         const { navigation } = this.props;
         const { deckId } = navigation.state.params;
         return (
-            <View>
+            <View style={styles.container}>
                 <Text>NEW QUESTION for {deckId} </Text>
             </View>
         )
@@ -25,6 +25,11 @@ class NewQuestion extends Component{
 }
 export default NewQuestion;
 
-const styles = StyleSheet.create({
 
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 });
