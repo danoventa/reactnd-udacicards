@@ -71,7 +71,6 @@ class Quiz extends Component {
     render() {
         const { questionIndex, toggle, score, questionCount, questions } = this.state;
 
-        console.log(questions);
         return (
             <View style={styles.container}>
                 { questionIndex < questionCount
