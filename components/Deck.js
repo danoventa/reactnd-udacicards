@@ -32,7 +32,7 @@ class Deck extends Component {
 
     state = {
         deck: {},
-        questionsCount: []
+        questionsCount: 0,
     };
 
     render() {
@@ -43,17 +43,19 @@ class Deck extends Component {
             <View style={styles.deck}>
                 <Text style={styles.deckText}>{deck.title}</Text>
                 <Text style={{color: lightPurp}}>{this.state.questionsCount} cards</Text>
-                <TouchableOpacity
-                    style={[styles.startQuiz]}
-                    onPress={() => navigation.navigate(
-                        'Quiz',
-                        {
-                            questions: deck.questions,
-                        })}>
-                    <Text style={styles.startQuizText} >
-                        Start Quiz
-                    </Text>
-                </TouchableOpacity>
+                { this.state.questionsCount > 0 &&
+                    <TouchableOpacity
+                        style={[styles.startQuiz]}
+                        onPress={() => navigation.navigate(
+                            'Quiz',
+                            {
+                                questions: this.state.deck.questions,
+                            })}>
+                        <Text style={styles.startQuizText}>
+                            Start Quiz
+                        </Text>
+                    </TouchableOpacity>
+                }
                 <TouchableOpacity
                     style={styles.addCard}
                     onPress={() => navigation.navigate(
@@ -86,7 +88,7 @@ const styles = StyleSheet.create({
         fontSize: 30,
     },
     startQuiz: {
-        paddingTop: 50,
+        paddingTop: 200,
     },
     startQuizText: {
         textAlign: 'center',
@@ -97,7 +99,7 @@ const styles = StyleSheet.create({
         color: purple,
     },
     addCard: {
-        paddingTop: 20,
+        paddingTop: 30,
     },
     addCardText: {
         textAlign: 'center',

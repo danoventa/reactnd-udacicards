@@ -41,7 +41,7 @@ class NewDeck extends Component {
                     <TouchableOpacity
                         onPress={this._setNewDeck}>
                         <Text style={styles.submitDeckText}>
-                            Submit New Question
+                            Submit New Deck
                         </Text>
                     </TouchableOpacity>
                 </View>
