@@ -7,35 +7,9 @@ const DECKS_KEY = 'udacicards:decks';
 export async function getDecks() {
 
     let result = await AsyncStorage.getItem(DECKS_KEY);
-    // await AsyncStorage.clear();
-
-    const mockDecks = {
-        React: {
-            title: 'React',
-            questions: [
-                {
-                    question: 'What is React?',
-                    answer: 'A library for managing user interfaces'
-                }
-            ]
-        },
-        JavaScript: {
-            title: 'JavaScript',
-            questions: [
-                {
-                    question: 'What is a closure?',
-                    answer: 'The combination of a function and the lexical environment within which that function was declared.'
-                },
-                {
-                    question: 'What is a closure?',
-                    answer: 'The combination of a function and the lexical environment within which that function was declared.'
-                }
-            ]
-        }
-    };
 
     if(result === null) {
-        await AsyncStorage.setItem(DECKS_KEY, JSON.stringify(mockDecks));
+        await AsyncStorage.setItem(DECKS_KEY, JSON.stringify({}));
         result = await AsyncStorage.getItem(DECKS_KEY);
     }
 
@@ -43,20 +17,20 @@ export async function getDecks() {
 }
 
 // getDeck: take in a single id argument and return the deck associated with that id.
-export async function getDeck(deckId){
+export async function getDeck(deckTitle){
 
     const mockDeck = {
         React: {
             title: 'React',
                 questions: [
                 {
-                    question: 'What is React?',
+                    question: deckTitle,
                     answer: 'A library for managing user interfaces'
                 }
             ]
         }}['React'];
 
-    return mockDeck;
+    return JSON.stringify(mockDeck);
 }
 
 
@@ -65,7 +39,6 @@ export async function saveDeckTitle (title){
 
     const jsonDecks = await AsyncStorage.getItem(DECKS_KEY);
     const decks = JSON.parse(jsonDecks);
-
 
     let newDeck = {
         ...decks,
@@ -79,11 +52,19 @@ export async function saveDeckTitle (title){
 }
 
 // addCardToDeck: take in two arguments, title and card, and will add the card to
-export async function addDeckToCard (deckTitle, card){
-    return decks[deck].append(card);
+export async function addCardToDeck (deckTitle, card) {
+    const jsonDecks = await AsyncStorage.getItem(DECKS_KEY);
+    const decks = JSON.parse(jsonDecks);
+
+    const updatedDecks = {
+        ...decks,
+        [deckTitle]: {
+            ...decks[deckTitle],
+            questions: [...decks[deckTitle].questions, card],
+        }
+    };
+
+    await AsyncStorage.setItem(DECKS_KEY, JSON.stringify(updatedDecks));
+
+    return updatedDecks[deckTitle];
 }
-
-function makeNewDeck(){}
-
-function makeNewQuestion(){}
-

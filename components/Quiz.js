@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
         width: 300,
         fontSize: 20,
         backgroundColor: purple,
-        padding: 5,
+        padding: 10,
         color: white,
     },
     wrongAnswer: {
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         width: 300,
         fontSize: 20,
         backgroundColor: pink,
-        padding: 5,
+        padding: 10,
         color: white,
     },
 });

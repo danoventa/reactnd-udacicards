@@ -21,16 +21,9 @@ class NewDeck extends Component {
                     title: '',
                 });
 
-            const setParamsAction = NavigationActions.setParams({
-                params: { title: 'Some Value From Tab1' },
-                key: 'Decks',
-            });
-
-            this.props.navigation.dispatch(this._updatedDeck, setParamsAction);
-            this.props.navigation.navigate('Decks', {update: true});
+                this.props.navigation.navigate('Decks', {update: true});
             }
         );
-
     };
 
     render() {
@@ -77,7 +70,7 @@ const styles = StyleSheet.create({
         width: 300,
         fontSize: 20,
         backgroundColor: purple,
-        padding: 5,
+        padding: 10,
         color: white,
     },
     userInput: {

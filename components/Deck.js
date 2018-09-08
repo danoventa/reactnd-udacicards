@@ -10,17 +10,39 @@ class Deck extends Component {
         }
     };
 
+    componentDidMount = async () =>  {
+        const {deck} = this.props.navigation.state.params;
+
+        this.setState({
+            deck,
+            questionsCount: this.getQuestionCount(deck),
+        });
+    };
+
+    returnDeck = (deck) => {
+        this.props.navigation.state.params.returnDecks();
+
+        this.setState({
+            deck,
+            questionsCount: this.getQuestionCount(deck),
+        });
+    };
+
+    getQuestionCount = (deck) => Object.keys(deck.questions).length;
+
+    state = {
+        deck: {},
+        questionsCount: []
+    };
+
     render() {
         const { navigation } = this.props;
-        const { deckId, deck } = navigation.state.params;
-
-        const deckCount = Object.keys(deck.questions).length;
+        const { deck } = navigation.state.params;
 
         return (
             <View style={styles.deck}>
                 <Text style={styles.deckText}>{deck.title}</Text>
-                <Text style={{color: lightPurp}}>{deckCount} cards</Text>
-
+                <Text style={{color: lightPurp}}>{this.state.questionsCount} cards</Text>
                 <TouchableOpacity
                     style={[styles.startQuiz]}
                     onPress={() => navigation.navigate(
@@ -36,7 +58,10 @@ class Deck extends Component {
                     style={styles.addCard}
                     onPress={() => navigation.navigate(
                     'NewQuestion',
-                        {deckId: deckId,})}>
+                        {
+                            deck,
+                            returnDeck: this.returnDeck.bind(this),
+                        })}>
                     <Text style={styles.addCardText} >
                         Add Card
                     </Text>
@@ -68,7 +93,7 @@ const styles = StyleSheet.create({
         width: 300,
         fontSize: 20,
         backgroundColor: white,
-        padding: 5,
+        padding: 10,
         color: purple,
     },
     addCard: {
@@ -79,7 +104,7 @@ const styles = StyleSheet.create({
         width: 300,
         fontSize: 20,
         backgroundColor: purple,
-        padding: 5,
+        padding: 10,
         color: white,
     },
 });

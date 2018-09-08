@@ -19,13 +19,14 @@ class Decks extends Component {
 
     _onRefresh = async () => {
         this.setState({refreshing: true});
-        await this.getItems().then(() => {
+        await this.getDecks().then(() => {
             this.setState({refreshing: false});
         });
     };
-    componentDidMount = async () =>  await this.getItems();
 
-    getItems = async () => {
+    componentDidMount = async () =>  await this.getDecks();
+
+    getDecks = async () => {
         await getDecks().then((json) => {
             this.setState(() => {
                     const rawDecks = JSON.parse(json);
@@ -54,6 +55,7 @@ class Decks extends Component {
                 {
                     deckId: `${index}-${deckObj.title}`,
                     deck: deckObj,
+                    returnDecks: this.getDecks.bind(this),
                 }
             )}>
             <View style={{justifyContent: 'center'}}>
@@ -70,25 +72,13 @@ class Decks extends Component {
     componentWillReceiveProps(nextProps) {
         const { params } = nextProps.navigation.state;
 
-        if( params && params.update ) {
-
-            this.setState({
-                decks: this.getItems(),
-            })
-        }
+        this.setState({
+            decks: this.getDecks(),
+        })
     }
 
     render() {
         const {decks} = this.state;
-
-        const didBlurSubscription = this.props.navigation.addListener(
-            'didBlur',
-            payload => {
-                console.debug('didBlur', payload);
-            }
-        );
-// Remove the listener when you are done
-        didBlurSubscription.remove();
 
         return (
             <View>
@@ -123,6 +113,7 @@ const styles = StyleSheet.create({
     },
     deckItemText: {
         color: white,
+        textAlign: 'center',
         fontSize: 20,
     }, 
     deckSubText: {

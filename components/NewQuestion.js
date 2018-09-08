@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {Text, View, StyleSheet, TextInput, TouchableOpacity} from 'react-native'
 import {lightPurp, purple, white} from "../utils/colors";
+import {addCardToDeck, saveDeckTitle} from "../utils/helpers";
+import {NavigationActions} from "react-navigation";
 
 class NewQuestion extends Component{
     static navigationOptions = ({navigation}) => {
@@ -10,16 +12,26 @@ class NewQuestion extends Component{
         }
     };
 
+    _saveNewQuestion = async () => {
+        const title = this.props.navigation.state.params.deck.title;
+        const card = {
+            question: this.state.question,
+            answer: this.state.answer,
+        };
+
+        await addCardToDeck(title, card).then((deck) => {
+                this.props.navigation.state.params.returnDeck(deck);
+                this.props.navigation.goBack();
+            }
+        );
+    };
 
     state = {
         question: "",
         answer: "",
     };
 
-
     render() {
-        const { navigation } = this.props;
-        const { deckId } = navigation.state.params;
         return (
             <View style={styles.container}>
                 <View style={styles.questionView}>
@@ -40,10 +52,9 @@ class NewQuestion extends Component{
                 </View>
                 <View style={styles.submitQuestion}>
                     <TouchableOpacity
-                        onPress={() => {
-                        }}>
+                        onPress={this._saveNewQuestion}>
                         <Text style={styles.submitQuestionText}>
-                            Submit New Deck
+                            Submit New Question
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -84,12 +95,12 @@ const styles = StyleSheet.create({
         width: 300,
         fontSize: 20,
         backgroundColor: purple,
-        padding: 5,
+        padding: 10,
         color: white,
     },
     userInput: {
         color: lightPurp,
-        padding: 6,
+        padding: 10,
         width: 300,
         height: 50,
         borderColor: 'white',
